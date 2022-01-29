@@ -8,12 +8,16 @@ from .models import Image
 from django.http.response import JsonResponse
 from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
 from .forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+@login_required(login_url='/signin/')
 @csrf_exempt
 def index(request):
     return render(request, 'lai_detector_app/index.html')
 
+@login_required(login_url='/signin/')
 @csrf_exempt
 def predict_lai(request):
     fileName, fileExtension = os.path.splitext(request.POST.get('filename'))
