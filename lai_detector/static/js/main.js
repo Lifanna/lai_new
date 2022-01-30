@@ -8,7 +8,7 @@ $(document).ready(() => {
                 
                     <div class="card shadow-lg rounded">
                         <div class="card-body text-center">
-                            <form id="form" method="post" action="" enctype="multipart/form-data" id="myform">
+                            <form id="form` + imagesCount + `" method="post" action="" enctype="multipart/form-data" id="myform">
                             <input type="hidden" name="csrfmiddlewaretoken" value="` + csrftoken + `">
                                 <div class="mt-4 col-sm-12">
                                     <!-- <input type="file" id="file" class="form-control m-2" name="file" /> -->
@@ -57,7 +57,7 @@ $(document).ready(() => {
         var id = event.target.id.replace('uploadBtn', '');
 
         var fd = new FormData();
-        var fdata = new FormData($('#form').get(0));
+        var fdata = new FormData($('#form' + id).get(0));
         var files = $('#filePhoto' + id)[0].files;
         
         if (files.length > 0 ){
