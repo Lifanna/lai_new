@@ -70,7 +70,7 @@ $(document).ready(() => {
         var fdata = new FormData($('#form' + id).get(0));
         var files = $('#filePhoto' + id)[0].files;
         
-        if (files.length > 0 ){
+        if ((files.length > 0 ) && ($("#X" + id).val() && $("#Y" + id).val() && $("#Latitude" + id).val() && $("#Longitude" + id).val())) {
             fd.append('file', files[0]);
             fdata.append('X', $("#X" + id).val());
             fdata.append('Y', $("#Y" + id).val());
@@ -157,8 +157,6 @@ $(document).ready(() => {
                     $("#loadMoreBtn").attr('offset', parseInt(offset) + 5);
                     count = parseInt($("#loadMoreBtn").attr('count'));
                     remaining = count - 5;
-                    
-                    
 
                     response.images.forEach((image, index) => {
                         imageIndex = index + 1;
