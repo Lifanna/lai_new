@@ -224,6 +224,8 @@ $(document).ready(() => {
                         `);
                     });
                     if (remaining <= 0){
+                        $("#loadMoreBtn").attr('count', 0);
+                        $("#loadMoreBtn").html("Get uploaded images (0)")
                         $('#loadMoreBtn').prop('disabled', true);
                         return
                     }
