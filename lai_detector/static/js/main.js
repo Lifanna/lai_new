@@ -158,13 +158,7 @@ $(document).ready(() => {
                     count = parseInt($("#loadMoreBtn").attr('count'));
                     remaining = count - 5;
                     
-                    if (remaining <= 0){
-                        $('#loadMoreBtn').prop('disabled', true);
-                        return
-                    }
-
-                    $("#loadMoreBtn").attr('count', remaining);
-                    $("#loadMoreBtn").html("Get uploaded images (" + remaining + ")")
+                    
 
                     response.images.forEach((image, index) => {
                         imageIndex = index + 1;
@@ -231,6 +225,13 @@ $(document).ready(() => {
                             </div>
                         `);
                     });
+                    if (remaining <= 0){
+                        $('#loadMoreBtn').prop('disabled', true);
+                        return
+                    }
+
+                    $("#loadMoreBtn").attr('count', remaining);
+                    $("#loadMoreBtn").html("Get uploaded images (" + remaining + ")")
                 }
                 else {
                     alert(response.message);
