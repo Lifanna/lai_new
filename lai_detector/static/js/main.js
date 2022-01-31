@@ -28,8 +28,8 @@ $(document).ready(() => {
                     <div class="card-body text-center">
                         <input type="text" class="form-control mt-2" placeholder="X" name="X" id="X` + imagesCount + `">
                         <input type="text" class="form-control mt-2" placeholder="Y" name="Y" id="Y` + imagesCount + `">
-                        <input type="text" class="form-control mt-2" placeholder="Latitude" name="Latitude" id="Latitude` + imagesCount + `">
-                        <input type="text" class="form-control mt-2" placeholder="Longitude" name="Longitude" id="Longitude` + imagesCount + `">
+                        <input type="text" class="form-control mt-2" placeholder="Height" name="Latitude" id="Latitude` + imagesCount + `">
+                        <input type="text" class="form-control mt-2" placeholder="Width" name="Longitude" id="Longitude` + imagesCount + `">
                     </div>
                 </div>
                 <div class="card shadow-lg rounded">
@@ -157,11 +157,14 @@ $(document).ready(() => {
                     $("#loadMoreBtn").attr('offset', parseInt(offset) + 5);
                     count = parseInt($("#loadMoreBtn").attr('count'));
                     remaining = count - 5;
+                    
+                    if (remaining <= 0){
+                        $('#loadMoreBtn').prop('disabled', true);
+                        return
+                    }
+
                     $("#loadMoreBtn").attr('count', remaining);
                     $("#loadMoreBtn").html("Get uploaded images (" + remaining + ")")
-                    
-                    if (remaining <= 0)
-                        $('#loadMoreBtn').prop('disabled', true);
 
                     response.images.forEach((image, index) => {
                         imageIndex = index + 1;

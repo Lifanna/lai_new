@@ -37,8 +37,8 @@ def predict_lai(request):
     fileName, fileExtension = os.path.splitext(request.POST.get('filename'))
     X = int(request.POST.get('X'))
     Y = int(request.POST.get('Y'))
-    Latitude = int(request.POST.get('Latitude'))
-    Longitude = int(request.POST.get('Longitude'))
+    Latitude = int(request.POST.get('Latitude')) + X
+    Longitude = int(request.POST.get('Longitude')) + Y
 
     now = datetime.now()
     date_time = now.strftime("%d_%m_%Y_%H_%M_%S")
