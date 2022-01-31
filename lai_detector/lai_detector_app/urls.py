@@ -15,6 +15,7 @@ urlpatterns = [
     path('login/', views.login, name='loginview'),
     path('signup/', views.signup, name='signupview'),
     path('signout/', views.logout, name='signoutview'),
+    path('load_more_images/', views.load_more_images, name='loadmoreimagesview'),
 ]
 
 # accounts/ login/ [name='login']

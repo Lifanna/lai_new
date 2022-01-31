@@ -265,12 +265,12 @@ def Predict_LAI(model, img, coord = [], plot = False):
     # plt.show()
     # plt.figure()
 
-    coords = (y,x,h,w)
+    coords = (x,y,h,w)
     
     return LAI, FVC, detected_output_image, output_image, coords
 
 
-def detect(image_path, image_id):
+def detect(image_path, image_id, X, Y, Latitude, Longitude):
     SITE_ROOT = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
     app_path = SITE_ROOT
     main_folder = SITE_ROOT.split('/')[-1]
@@ -292,7 +292,8 @@ def detect(image_path, image_id):
 
     Lai_model = Lai.load_model(app_path + '/' + 'Lai_model.h5')
     img = imread(SITE_ROOT + image_path) #Input Image
-    box_img = [1745,1600,2701,1965] # [x, y, x+width, y+height, ]
+    # box_img = [1745,1600,2701,1965] # [x, y, x+width, y+height, ]
+    box_img = [X, Y, Latitude, Longitude] # [x, y, x+width, y+height, ]
     
     LAI, FVC, detected_output_image, output_image, coords = Predict_LAI(Lai, img, coord = box_img)
 
@@ -307,8 +308,17 @@ def detect(image_path, image_id):
     detected_output_image_path = image_path + '_detected_output.jpg'
 
     image_object = ImageModel.objects.get(id=image_id)
-    image_object.path = image_path + '_output.jpg'
+    image_object.path = image_path + '.jpg'
+    
+    image_object.LAI = LAI
+    image_object.FVC = FVC
+    image_object.X = X
+    image_object.Y = Y
+    image_object.Latitude = Latitude
+    image_object.Longitude = Longitude
+    
     image_object.detected_path = image_path + '_detected_output.jpg'
+    image_object.output_path = image_path + '_output.jpg'
 
     image_object.detected_output_image_file = File(detected_output_image)
     image_object.detected_image_file = File(output_image)
